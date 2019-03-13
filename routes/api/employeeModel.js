@@ -72,7 +72,15 @@ function employeeModel(db){
 
 
 
-
+  lib.addNewEmployee = (newEmpl, handler)=>{
+    empColl.insertOne(newEmpl, (err, r)=>{
+      if(err){
+        handler(err, null);
+      }else{
+        handler(null, r.result);
+      }
+    });
+  }
 
 
   //Implementar

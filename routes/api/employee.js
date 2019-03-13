@@ -33,16 +33,9 @@ function initEmployee(db) {
 
 };
 
-  //rutas a implementar
-  // metodo     ruta                     body
-  /*
 
-
-      GET       /all
-*/        /// --------------------------------------------------------------Mongo Model funsion
-
-      router.get('//all', function( req, res, next) {
-        employeeModel.getEmployees(
+router.get('//all', function( req, res, next) {
+      employeeModel.getEmployees(
           function(err, docs){
             if(err) {
               console.log(err);
@@ -50,11 +43,9 @@ function initEmployee(db) {
             }
             return res.status(200).json(docs);
           }
-);        /// --------------------------------------------------------------Mongo Model funsion
+);
 
-/*
-      GET       /byid/:id
-      */
+
 
 router.get('/byid/:id', (req, res, next)=>{
   employeeModel.getEmployeesById(req.params.id, (err, Doc)=>{
@@ -67,10 +58,10 @@ router.get('/byid/:id', (req, res, next)=>{
       });
 
 
-      /*
-      GET       /bycompany/:company
-      GET       /byagerange/:min/:max
-      GET       /bytag/:tag*/
+
+
+
+
 router.get('/bytags/:tag', (req, res, next)=>{
   employeeModel.getEmployeesByTag((req.params.tag || '').split('_'), (err, docs)=>{
           if(err){
@@ -81,9 +72,9 @@ router.get('/bytags/:tag', (req, res, next)=>{
           }
     } );
 });
-      /*
-      POST      /addtag/:id              tag
-*/
+
+
+
 router.put('/addtags/:id', (req, res, next)=>{
   employeeModel.addEmployeeATag((req.body.tags || '').split('|'), req.params.id, (err, rsult)=>{
     if(err){
@@ -96,9 +87,25 @@ router.put('/addtags/:id', (req, res, next)=>{
 
 
 
-/*
-      DELETE    /delete/:id
-  */
+router.post('/new', function(req, res, next){
+  var _thingsData = Object.assign({} , bigThingTp, req.body);
+  var dateT = new Date();
+  var dateD = new Date();
+  dateD.setDate(dateT.getDate()+ 3);
+  _thingsData.fcIng = dateT;
+  _thingsData.due = dateD;
+ // _thingsData._id = uuidv4();
+  // Mongo Model
+  employeeModel.addNewEmployee(_thingsData, (err, newEpml)=>{
+    if(err){
+      console.log(err);
+      return res.status(500).json({"error":"No se puede agregar"});
+    }
+    return res.status(200).json(newEmpl);
+  });
+
+
+
   router.delete('/delete/:Id', function(req, res, next){
         var _thingId = req.params.thingId;
         employeeModel.removeEmployee(_Id, (err, result)=>{
