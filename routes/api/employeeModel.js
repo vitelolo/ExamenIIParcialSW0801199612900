@@ -52,14 +52,26 @@ function employeeModel(db){
     return handler(new Error("No Implementado"), null);
   }
 
+
+
+
+
   lib.getEmployeesByTag = (tag, handler) => {
-    //implementar
-    // obtener todos los documentos que contenga
-    // al menos una vez el tag dentro del arreglo
-    // tags
-    // mostrar solo name, email, tags
+    var curatedTags = Array.isArray(tags)? tags: [tags];
+  var updateObject = { "$set": { "tags": curatedTags}};
+  empColl.updateOne({"_id": ObjectId(id)}, {'name':0,'age'':0,'email':0},, (err, rsult)=>{
+      if(err){
+        handler(err, null);
+      }else{
+        handler(null, rsult.result);
+      }
+  } ); // updateOne
     return handler(new Error("No Implementado"), null);
   }
+
+
+
+
 
   lib.addEmployeeATag = ( tag, id, handler) => {
     //Implementar

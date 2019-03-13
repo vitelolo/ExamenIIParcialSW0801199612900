@@ -41,7 +41,7 @@ function initEmployee(db) {
       GET       /all
 */        /// --------------------------------------------------------------Mongo Model funsion
 
-      router.get('/', function( req, res, next) {
+      router.get('//all', function( req, res, next) {
         employeeModel.getEmployees(
           function(err, docs){
             if(err) {
@@ -57,7 +57,7 @@ function initEmployee(db) {
       */
 
 router.get('/byid/:id', (req, res, next)=>{
-  mongoModel.getThingById(req.params.id, (err, Doc)=>{
+  employeeModel.getEmployeesById(req.params.id, (err, Doc)=>{
           if(err){
             console.log(err);
             return res.status(500).json({"error":"Error al obtener el Thing"});
@@ -70,19 +70,23 @@ router.get('/byid/:id', (req, res, next)=>{
       /*
       GET       /bycompany/:company
       GET       /byagerange/:min/:max
-      GET       /bytag/:tag
+      GET       /bytag/:tag*/
+router.get('/bytags/:tag', (req, res, next)=>{
+  employeeModel.getEmployeesByTag((req.params.tag || '').split('_'), (err, docs)=>{
+          if(err){
+            console.log(err);
+            return res.status(500).json({"error":"No se encontro OBTS"});
+          }else{
+            return res.status(200).json(docs);
+          }
+    } );
+});
+      /*
       POST      /addtag/:id              tag
       DELETE    /delete/:id
       POST      /makeolder               age
    */
 
-  router.get('/all', (req, res, next) => {
-    /*
-    empModel.xyz( (err, docs)=>{
-      return res.status(200).json(docs);
-    });
-    */
-  });// all
 
 
   return router;
