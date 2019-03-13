@@ -83,6 +83,20 @@ router.get('/bytags/:tag', (req, res, next)=>{
 });
       /*
       POST      /addtag/:id              tag
+*/
+router.put('/addtags/:id', (req, res, next)=>{
+  employeeModel.addEmployeeATag((req.body.tags || '').split('|'), req.params.id, (err, rsult)=>{
+    if(err){
+      console.log(err);
+      return res.status(500).json({"error":"No se puede actualizar el OBT"});
+    }
+    return res.status(200).json(rsult);
+  });// end addTagsToThing
+});// addtags
+
+
+
+/*
       DELETE    /delete/:id
   */
   router.delete('/delete/:Id', function(req, res, next){

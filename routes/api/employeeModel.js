@@ -23,7 +23,7 @@ function employeeModel(db){
 
   // findOne
   // implementar
-  // Obtener un Documento solo mostrar
+  // empCollener un Documento solo mostrar
   // email, phone, name y age
 
   lib.getEmployeesById = (id, handler) => {
@@ -65,20 +65,39 @@ function employeeModel(db){
       }else{
         handler(null, rsult.result);
       }
-  } ); // updateOne
+  } );
     return handler(new Error("No Implementado"), null);
   }
 
 
 
 
+
+
+
+  //Implementar
+  //Se requiere agregar a un documento un nuevo tag
+  // $push
 
   lib.addEmployeeATag = ( tag, id, handler) => {
-    //Implementar
-    //Se requiere agregar a un documento un nuevo tag
-    // $push
+    var curatedTags = Array.isArray(tags)? tags: [tags];
+        var updateObject = { "$set": { "tags": curatedTags}};   //-------"tags" representa el valor a cambiar
+        empColl.updateOne({"_id": ObjectId(id)}, updateObject, (err, rsult)=>{
+            if(err){
+              handler(err, null);
+            }else{
+              handler(null, rsult.result);
+            }
+        } );
+
     return handler(new Error("No Implementado"), null);
-  }
+}
+
+
+
+
+
+
 
   lib.removeEmployee = (id, handler) => {
     empColl.deleteOne({"_id": ObjectId(Id)}, (err, rslt)=>{
@@ -92,10 +111,11 @@ function employeeModel(db){
     return handler(new Error("No Implementado"), null);
   }
 
+
+
+
   lib.increaseAgeToAll = (ageDelta, handler) => {
-    //Implementar
-    //Se requiere modificar todos los documentos de la colección
-    // incrementando age por la cantidad de ageDelta $inc
+    //none
     return handler(new Error("No Implementado"), null);
   }
   return lib;
