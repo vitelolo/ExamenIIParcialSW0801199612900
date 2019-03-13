@@ -39,7 +39,7 @@ function employeeModel(db){
 
 
   lib.getEmployeesByCompany = (company, handler) => {
-    empColl.findOne({ "company": new ObjectId(comp)}, {'name','age'','email'},  (err, doc)=>{
+    empColl.findOne({ "company": new ObjectId(company)}, {'name','age'','email'},  (err, doc)=>{
         if(err){
           handler(err, null);
         }else{

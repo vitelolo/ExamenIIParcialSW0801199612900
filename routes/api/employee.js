@@ -60,7 +60,7 @@ router.get('/byid/:id', (req, res, next)=>{
 
 
 router.get('/bycompany/:company', (req, res, next)=>{
-        employeeModel.getEmployeesByCompany((req.params.comp || '').split('_'), (err, docs)=>{
+        employeeModel.getEmployeesByCompany((req.params.company || '').split('_'), (err, docs)=>{
                 if(err){
                   console.log(err);
                   return res.status(500).json({"error":"No se encontro"});
