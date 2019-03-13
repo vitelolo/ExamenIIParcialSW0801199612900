@@ -59,6 +59,16 @@ router.get('/byid/:id', (req, res, next)=>{
 
 
 
+router.get('/bycompany/:company', (req, res, next)=>{
+        employeeModel.getEmployeesByCompany((req.params.comp || '').split('_'), (err, docs)=>{
+                if(err){
+                  console.log(err);
+                  return res.status(500).json({"error":"No se encontro"});
+                }else{
+                  return res.status(200).json(docs);
+                }
+          } );
+});
 
 
 
@@ -66,7 +76,7 @@ router.get('/bytags/:tag', (req, res, next)=>{
   employeeModel.getEmployeesByTag((req.params.tag || '').split('_'), (err, docs)=>{
           if(err){
             console.log(err);
-            return res.status(500).json({"error":"No se encontro OBTS"});
+            return res.status(500).json({"error":"No se encontro"});
           }else{
             return res.status(200).json(docs);
           }
@@ -79,11 +89,13 @@ router.put('/addtags/:id', (req, res, next)=>{
   employeeModel.addEmployeeATag((req.body.tags || '').split('|'), req.params.id, (err, rsult)=>{
     if(err){
       console.log(err);
-      return res.status(500).json({"error":"No se puede actualizar el OBT"});
+      return res.status(500).json({"error":"No se puede actualizar "});
     }
     return res.status(200).json(rsult);
-  });// end addTagsToThing
-});// addtags
+  });
+});
+
+
 
 
 
@@ -107,7 +119,7 @@ router.post('/new', function(req, res, next){
 
 
   router.delete('/delete/:Id', function(req, res, next){
-        var _thingId = req.params.thingId;
+        var _id = req.params.id;
         employeeModel.removeEmployee(_Id, (err, result)=>{
           if(err){
             return res.status(500).json({"error":"No se pudo eliminar dato"});

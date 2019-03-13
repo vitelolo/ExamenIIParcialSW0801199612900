@@ -27,7 +27,7 @@ function employeeModel(db){
   // email, phone, name y age
 
   lib.getEmployeesById = (id, handler) => {
-    empColl.findOne({ "_id": new ObjectId(thingId)}, {'name':0,'age'':0,'email':0,'phone':0},  (err, doc)=>{
+    empColl.findOne({ "_id": new ObjectId(id)}, {'name','age','email','phone'},  (err, doc)=>{
         if(err){
           handler(err, null);
         }else{
@@ -37,7 +37,15 @@ function employeeModel(db){
     return handler(new Error("No Implementado"), null);
   }
 
+
   lib.getEmployeesByCompany = (company, handler) => {
+    empColl.findOne({ "company": new ObjectId(comp)}, {'name','age'','email'},  (err, doc)=>{
+        if(err){
+          handler(err, null);
+        }else{
+          handler(null, doc);
+        }
+      });
     // implementar
     // solo mostrar name, email, company
     return handler(new Error("No Implementado"), null);
@@ -59,7 +67,7 @@ function employeeModel(db){
   lib.getEmployeesByTag = (tag, handler) => {
     var curatedTags = Array.isArray(tags)? tags: [tags];
   var updateObject = { "$set": { "tags": curatedTags}};
-  empColl.updateOne({"_id": ObjectId(id)}, {'name':0,'age'':0,'email':0},, (err, rsult)=>{
+  empColl.updateOne({"_id": ObjectId(id)}, {'name','age','email'},, (err, rsult)=>{
       if(err){
         handler(err, null);
       }else{
