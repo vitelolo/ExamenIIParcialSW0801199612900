@@ -36,7 +36,23 @@ function initEmployee(db) {
   //rutas a implementar
   // metodo     ruta                     body
   /*
+
+
       GET       /all
+*/        /// --------------------------------------------------------------Mongo Model funsion
+
+      router.get('/', function( req, res, next) {
+        employeeModel.getEmployees(
+          function(err, docs){
+            if(err) {
+              console.log(err);
+              return res.status(500).json({error:"No funcionó"});
+            }
+            return res.status(200).json(docs);
+          }
+);        /// --------------------------------------------------------------Mongo Model funsion
+
+/*
       GET       /byid/:id
       GET       /bycompany/:company
       GET       /byagerange/:min/:max

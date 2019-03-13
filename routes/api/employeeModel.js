@@ -3,7 +3,20 @@ var ObjectID = require('mongodb').ObjectID;
 function employeeModel(db){
   var lib = {};
   var empColl = db.collection('emps');
+
   lib.getEmployees = (handler)=>{
+    empColl.find({}).toArray(
+
+            (err , docs) => {
+              if(err){
+                handler(err, null);
+              }else{
+                handler(null, docs);
+              }
+            }
+
+           );
+
     // implementar
     // obtener todos los documentos
     return handler(new Error("No Implementado"), null);
@@ -33,7 +46,7 @@ function employeeModel(db){
 
   lib.getEmployeesByTag = (tag, handler) => {
     //implementar
-    // obtener todos los documentos que contenga 
+    // obtener todos los documentos que contenga
     // al menos una vez el tag dentro del arreglo
     // tags
     // mostrar solo name, email, tags
