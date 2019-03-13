@@ -3,6 +3,35 @@ var router = express.Router();
 
 function initEmployee(db) {
   var empModel = require('./employeeModel')(db);
+  var data = null;
+  var bigThingTp = {
+  //'_id':'',
+  'index':null,
+  'guid':'',
+  'isActive':false,
+  'balance':null,
+  'picture':'',
+  'age':null,
+  'eyecolor':'',
+  'name':{
+            'fisrt':'',
+            'last':''
+          },
+  'company':'',
+  'email':'',
+  'phone':'',
+  'address':'',
+  'about':'',
+  'registered':'',
+  'latitude':'',
+  'longitude':'',
+  'tags':'[]',
+  'range':'[]',
+  'friends':'',
+  'greeting':'',
+  'favoriteFruit':''
+
+};
 
   //rutas a implementar
   // metodo     ruta                     body
@@ -25,7 +54,7 @@ function initEmployee(db) {
     */
   });// all
 
-  
+
   return router;
 }
 
