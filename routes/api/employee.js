@@ -54,6 +54,20 @@ function initEmployee(db) {
 
 /*
       GET       /byid/:id
+      */
+
+router.get('/byid/:id', (req, res, next)=>{
+  mongoModel.getThingById(req.params.id, (err, Doc)=>{
+          if(err){
+            console.log(err);
+            return res.status(500).json({"error":"Error al obtener el Thing"});
+          }
+          return res.status(200).json(Doc);
+        } );
+      });
+
+
+      /*
       GET       /bycompany/:company
       GET       /byagerange/:min/:max
       GET       /bytag/:tag

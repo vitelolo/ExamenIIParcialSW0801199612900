@@ -16,16 +16,24 @@ function employeeModel(db){
             }
 
            );
-
-    // implementar
-    // obtener todos los documentos
     return handler(new Error("No Implementado"), null);
   }
 
+
+
+  // findOne
+  // implementar
+  // Obtener un Documento solo mostrar
+  // email, phone, name y age
+
   lib.getEmployeesById = (id, handler) => {
-    // implementar
-    // Obtener un Documento solo mostrar
-    // email, phone, name y age
+    empColl.findOne({ "_id": new ObjectId(thingId)}, {'name':0,'age'':0,'email':0,'phone':0},  (err, doc)=>{
+        if(err){
+          handler(err, null);
+        }else{
+          handler(null, doc);
+        }
+      });
     return handler(new Error("No Implementado"), null);
   }
 
