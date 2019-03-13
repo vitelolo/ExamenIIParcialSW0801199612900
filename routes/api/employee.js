@@ -84,6 +84,16 @@ router.get('/bytags/:tag', (req, res, next)=>{
       /*
       POST      /addtag/:id              tag
       DELETE    /delete/:id
+  */
+  router.delete('/delete/:Id', function(req, res, next){
+        var _thingId = req.params.thingId;
+        employeeModel.removeEmployee(_Id, (err, result)=>{
+          if(err){
+            return res.status(500).json({"error":"No se pudo eliminar dato"});
+          }
+          return res.status(200).json(result);
+        });
+/*
       POST      /makeolder               age
    */
 

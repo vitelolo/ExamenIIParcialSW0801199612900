@@ -81,8 +81,14 @@ function employeeModel(db){
   }
 
   lib.removeEmployee = (id, handler) => {
-    //Implementar
-    //Se requiere eliminar un documento de la colección
+    empColl.deleteOne({"_id": ObjectId(Id)}, (err, rslt)=>{
+        if(err){
+          console.log(err);
+          handler(err, null);
+        } else {
+          handler(null, rslt.result);
+        }
+      });
     return handler(new Error("No Implementado"), null);
   }
 
